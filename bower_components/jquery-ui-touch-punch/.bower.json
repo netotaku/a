@@ -1,0 +1,14 @@
+{
+  "name": "jquery-ui-touch-punch",
+  "homepage": "https://github.com/furf/jquery-ui-touch-punch",
+  "_release": "master",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "72d67b63c98a6d9c324881343fcd423b88939ccf"
+  },
+  "_source": "https://github.com/furf/jquery-ui-touch-punch.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/furf/jquery-ui-touch-punch.git",
+  "_direct": true
+}

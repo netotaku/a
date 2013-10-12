@@ -1,0 +1,17 @@
+{
+  "name": "a",
+  "version": "0.0.0",
+  "authors": [
+    "Nick Clarkson <nikclarkson@gmail.com>"
+  ],
+  "description": "anagram game",
+  "main": "anagram",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
