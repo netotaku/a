@@ -2,11 +2,60 @@
 
 session_start(); 
 
-include "config.php";
+class game{
+  function __construct(){
+    if($this->in_progress()){
+      $this->set_word();
+    }
+  }
+  public function set_word(){
+    include "config.php";
+    $uri = $wrdURL;
+    foreach($wrdQS as $key => $val){
+      $uri .= $key."=".$val."&";
+    }
+    $wrd = json_decode(file_get_contents(rtrim($uri, '&')));
+    $uri = $defURL.$wrd->word.'/definitions?';
+    foreach($defQS as $key => $val){
+      $uri .= $key."=".$val."&";
+    }
+    $def = json_decode(file_get_contents(rtrim($uri, '&')));
+    $_SESSION['game'][] = array(
+      "wrd" => $wrd,
+      "def" => $def,
+      "start_time" => time(),
+      "end_time" => null,
+      "anagram" => str_shuffle($wrd->word)
+    );
+  }
+  public function latest(){
+    return end($_SESSION['game']);  
+  }
+  public function in_progress(){
+    return isset($_SESSION['game']);
+  }
+  public function start_game(){
+    if(!$this->in_progress()){
+      $_SESSION['game'] = array();
+      $this->set_word();
+    }
+    header('Location: /');
+  }
+  public function end_game(){
+    session_destroy();
+    header('Location: /');
+  }
+  public function anagram(){
+    return str_split($this->latest()['anagram']); 
+  }
+  public function solution(){
+    return $this->latest()['wrd']->word;  
+  }
+}
 
-$params = explode('/',ltrim(rtrim($_SERVER["REQUEST_URI"], '/'), '/'));
+$g = new game();
 
-switch($params[0]){
+switch(explode('/',ltrim(rtrim($_SERVER["REQUEST_URI"], '/'), '/'))[0]){
   case "":
   case "hard":
   case "medium":
@@ -14,14 +63,11 @@ switch($params[0]){
     include "views/index.tmp.php";
   break;
   case "start":
-    if(!isset($_SESSION['game'])){
-      $_SESSION['game'] = array();
-    }
-    header('Location: /');     
+    $g->start_game();
   break;
   case "quit":
-    session_destroy(); 
-    header('Location: /');   
+    $g->end_game();
+  break;  
   case "hint":
     echo "hint";
   break;

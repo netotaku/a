@@ -1,0 +1,74 @@
+@import "compass/css3";
+@import "compass/reset";
+
+*{
+  @include box-sizing(border-box);
+}
+
+header{
+  background: #111;
+  position: relative;
+  color: #fff;
+  a{
+    color: #fff;
+    text-decoration: none;
+  }
+  nav{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    ul{
+      li{
+        float: left;
+      }
+    }
+  }
+  h1,
+  nav ul li span,
+  nav ul li a
+  {
+    display: block;
+    padding: 10px;
+  }
+  nav ul li span,
+  nav ul li a{
+    background: #333;
+    &:hover{
+      background: #666;
+    }
+  }
+  h1{
+    font-weight: bold;
+  }
+}
+
+footer,
+article{
+  padding: 10px;
+}
+
+footer{
+  background: #eee;
+  position: absolute;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  color: #666;
+  width: 100%;
+}
+
+.anagram{
+  text-align: center;
+  li{
+    display: inline-block;
+    span{
+      display: block;
+      padding: 20px 0px;
+      text-align: center;
+      width: 50px;
+      border: solid 1px #ccc;
+    }
+  }
+}
+
+
