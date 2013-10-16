@@ -132,14 +132,24 @@ footer {
 }
 
 /* line 61, ../scss/style.scss */
+em {
+  font-style: italic;
+}
+
+/* line 66, ../scss/style.scss */
+#hint ul {
+  margin-bottom: 20px;
+}
+
+/* line 71, ../scss/style.scss */
 .tiles {
   margin-bottom: 20px;
 }
-/* line 63, ../scss/style.scss */
+/* line 73, ../scss/style.scss */
 .tiles li {
   display: inline-block;
 }
-/* line 65, ../scss/style.scss */
+/* line 75, ../scss/style.scss */
 .tiles li span {
   display: block;
   padding: 20px 0px;
@@ -147,14 +157,14 @@ footer {
   width: 50px;
 }
 
-/* line 77, ../scss/style.scss */
+/* line 87, ../scss/style.scss */
 .anagram li span {
   border: solid 1px #ccc;
   background: #fff;
   cursor: move;
 }
 
-/* line 87, ../scss/style.scss */
+/* line 97, ../scss/style.scss */
 .solution li span {
   background: #eee;
 }

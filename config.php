@@ -12,7 +12,7 @@
       "minDictionaryCount" => "1",
       "maxDictionaryCount" => "-1",
       "minLength" => "5",
-      "maxLength" => "-1",
+      "maxLength" => "10",
       "api_key" => $key
       );
 

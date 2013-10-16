@@ -15,6 +15,9 @@
         <li><span data-drop-id="">&nbsp;</span></li>
       <?php endforeach;?>
     </ul>
+    <p><a href="/hint" class="hint">Hint</a></p>
+    <div id="hint"></div>
+    <p>Score <?=$g->score()?></p>
     <form id="solution" method="post" action="/solution">
       <input type="hidden" name="solution" value="">
       <button class="submit">Submit</button>
