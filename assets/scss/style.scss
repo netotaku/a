@@ -31,16 +31,19 @@ html{
 
 header{
   padding-top: 20px;
-  margin-bottom: 20px;
 }
 
 h1{
   font-weight: bold;
-  margin-bottom: 20px;
   font-size: 1.8em;
 }
 
-p{
+p, 
+ul, 
+form, 
+h1, 
+h2,
+header{
   margin-bottom: 20px;
 }
 
@@ -62,14 +65,7 @@ em{
   font-style: italic;  
 }
 
-#hint{
-  ul{
-    margin-bottom: 20px;
-  }
-}
-
 .tiles{
-  margin-bottom: 20px;
   li{
     display: inline-block;
     span{
@@ -100,5 +96,19 @@ em{
   }
 }
 
+.initials{
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.score{
+  display: block;
+  font-size: 2em;
+  line-height: 1.3;
+}
+
+small{
+  font-size: .8em;
+}
 
 
