@@ -5,41 +5,43 @@
   @include box-sizing(border-box);
 }
 
-header{
-  background: #111;
-  position: relative;
-  color: #fff;
-  a{
-    color: #fff;
+a{
+  color: #37c;
+  &:hover{
     text-decoration: none;
   }
-  nav{
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    ul{
-      li{
-        float: left;
-      }
-    }
-  }
-  h1,
-  nav ul li span,
-  nav ul li a
-  {
-    display: block;
-    padding: 10px;
-  }
-  nav ul li span,
-  nav ul li a{
-    background: #333;
-    &:hover{
-      background: #666;
-    }
-  }
-  h1{
-    font-weight: bold;
-  }
+}
+
+html{
+  -webkit-text-rendering: optimizeLegibility;
+  -moz-text-rendering: optimizeLegibility;
+  -ms-text-rendering: optimizeLegibility;
+  -o-text-rendering: optimizeLegibility;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  -ms-font-smoothing: antialiased;
+  -o-font-smoothing: antialiased;
+  font-smoothing: antialiased;    
+  font-family: 'EB Garamond', serif;  
+  text-align: center;
+  line-height: 1.2;
+  color: #333;
+}
+
+header{
+  padding-top: 20px;
+  margin-bottom: 20px;
+}
+
+h1{
+  font-weight: bold;
+  margin-bottom: 20px;
+  font-size: 1.8em;
+}
+
+p{
+  margin-bottom: 20px;
 }
 
 footer,
@@ -48,7 +50,6 @@ article{
 }
 
 footer{
-  background: #eee;
   position: absolute;
   position: fixed;
   bottom: 0px;
@@ -57,8 +58,8 @@ footer{
   width: 100%;
 }
 
-.anagram{
-  text-align: center;
+.tiles{
+  margin-bottom: 20px;
   li{
     display: inline-block;
     span{
@@ -66,9 +67,28 @@ footer{
       padding: 20px 0px;
       text-align: center;
       width: 50px;
+      
+    }
+  }  
+}
+
+.anagram{
+  li{
+    span{
       border: solid 1px #ccc;
+      background: #fff;
+      cursor: move;
     }
   }
 }
+
+.solution{
+  li{
+    span{
+      background: #eee;
+    }
+  }
+}
+
 
 

@@ -46,7 +46,7 @@ class game{
     header('Location: /');
   }
   public function anagram(){
-    return str_split($this->latest()['anagram']); 
+    return str_split(strtoupper($this->latest()['anagram'])); 
   }
   public function solution(){
     return $this->latest()['wrd']->word;  
@@ -61,6 +61,9 @@ switch(explode('/',ltrim(rtrim($_SERVER["REQUEST_URI"], '/'), '/'))[0]){
   case "medium":
   case "easy":
     include "views/index.tmp.php";
+  break;
+  case "solution":
+    echo $_POST["solution"];
   break;
   case "start":
     $g->start_game();

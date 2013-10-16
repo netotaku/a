@@ -71,57 +71,58 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 /* line 8, ../scss/style.scss */
-header {
-  background: #111;
-  position: relative;
-  color: #fff;
+a {
+  color: #37c;
 }
-/* line 12, ../scss/style.scss */
-header a {
-  color: #fff;
+/* line 10, ../scss/style.scss */
+a:hover {
   text-decoration: none;
 }
-/* line 16, ../scss/style.scss */
-header nav {
-  position: absolute;
-  right: 0px;
-  top: 0px;
-}
-/* line 21, ../scss/style.scss */
-header nav ul li {
-  float: left;
-}
-/* line 29, ../scss/style.scss */
-header h1,
-header nav ul li span,
-header nav ul li a {
-  display: block;
-  padding: 10px;
-}
-/* line 34, ../scss/style.scss */
-header nav ul li span,
-header nav ul li a {
-  background: #333;
-}
-/* line 36, ../scss/style.scss */
-header nav ul li span:hover,
-header nav ul li a:hover {
-  background: #666;
-}
-/* line 40, ../scss/style.scss */
-header h1 {
-  font-weight: bold;
+
+/* line 15, ../scss/style.scss */
+html {
+  -webkit-text-rendering: optimizeLegibility;
+  -moz-text-rendering: optimizeLegibility;
+  -ms-text-rendering: optimizeLegibility;
+  -o-text-rendering: optimizeLegibility;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  -ms-font-smoothing: antialiased;
+  -o-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  font-family: 'EB Garamond', serif;
+  text-align: center;
+  line-height: 1.2;
+  color: #333;
 }
 
-/* line 46, ../scss/style.scss */
+/* line 32, ../scss/style.scss */
+header {
+  padding-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* line 37, ../scss/style.scss */
+h1 {
+  font-weight: bold;
+  margin-bottom: 20px;
+  font-size: 1.8em;
+}
+
+/* line 43, ../scss/style.scss */
+p {
+  margin-bottom: 20px;
+}
+
+/* line 48, ../scss/style.scss */
 footer,
 article {
   padding: 10px;
 }
 
-/* line 50, ../scss/style.scss */
+/* line 52, ../scss/style.scss */
 footer {
-  background: #eee;
   position: absolute;
   position: fixed;
   bottom: 0px;
@@ -130,19 +131,30 @@ footer {
   width: 100%;
 }
 
-/* line 60, ../scss/style.scss */
-.anagram {
-  text-align: center;
+/* line 61, ../scss/style.scss */
+.tiles {
+  margin-bottom: 20px;
 }
-/* line 62, ../scss/style.scss */
-.anagram li {
+/* line 63, ../scss/style.scss */
+.tiles li {
   display: inline-block;
 }
-/* line 64, ../scss/style.scss */
-.anagram li span {
+/* line 65, ../scss/style.scss */
+.tiles li span {
   display: block;
   padding: 20px 0px;
   text-align: center;
   width: 50px;
+}
+
+/* line 77, ../scss/style.scss */
+.anagram li span {
   border: solid 1px #ccc;
+  background: #fff;
+  cursor: move;
+}
+
+/* line 87, ../scss/style.scss */
+.solution li span {
+  background: #eee;
 }

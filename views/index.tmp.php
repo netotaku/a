@@ -3,16 +3,23 @@
   <?php if(!$g->in_progress()) : ?>
       <p><a href="/start">New Game</a></p>
   <? else : ?>
-    <ul class="anagram">
+    <ul class="tiles anagram">
+      <?php $i=0; ?>
       <?php foreach ($g->anagram() as $letter) : ?>
-        <li><span><?=$letter?></span></li>
+        <li><span id="letter-<?=$i++?>" data-letter="<?=$letter?>"><?=$letter?></span></li>
       <?php endforeach;?>
     </ul>
-    <pre>
-      <?php 
-        //var_dump();
-      ?>    
-    </pre>
+    <p>( <em>Drag &amp; drop your solution</em> )</p>
+    <ul class="tiles solution">
+      <?php foreach ($g->anagram() as $letter) : ?>
+        <li><span data-drop-id="">&nbsp;</span></li>
+      <?php endforeach;?>
+    </ul>
+    <form id="solution" method="post" action="/solution">
+      <input type="hidden" name="solution" value="">
+      <button class="submit">Submit</button>
+    </form>
+    <pre><?php //var_dump(); ?></pre>
   <?php endif; ?>
 </article>
 <?php include "elements/footer.tmp.php"; ?>
