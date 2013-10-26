@@ -1,8 +1,8 @@
   <footer>
-    Powered by <a href="#">Wordnik</a> | <?=$g->solution()?>
+    Powered by <a href="#">Wordnik</a> <?php // $g->solution()?>
   </footer>
   <script type="text/html" id="tmp-hint">
-    <ul>
+    <ul class="hint">
       <% $.each(items, function(){ %>
         <li><%=this.text%></li>
       <% }) %>
@@ -19,6 +19,15 @@
         $("[data-drop-id='"+$(this).css('z-index', 1).attr('id')+"']")
           .attr('data-drop-id', '')
           .droppable('enable');
+      },
+      stop:function(){
+        var submit = $('#submit')[0];
+            submit.disabled = false;
+        $('.solution li span').each(function(){
+          if($(this).attr('data-drop-id')==''){
+            submit.disabled = true;
+          }  
+        });
       }
     });
 

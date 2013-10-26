@@ -1,6 +1,7 @@
 <?php
 
 session_start(); 
+// error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
 class game{
   function __construct(){
@@ -24,102 +25,92 @@ class game{
         "def" => $def,
         "start_time" => time(),
         "end_time" => null,
-        "anagram" => str_shuffle($wrd->word),
+        "anagram" => strtoupper(str_shuffle($wrd->word)),
         "correct" => false,
-        "hint" => false
+        "hint" => false,
+        "solution" => strtoupper($wrd->word),
+        "answer" => '',
+        "score" => 0
       );
     }
-  }
-  public function &game(){
-    return $_SESSION['game'];
-  }
-  public function latest(){
-    if(isset($_SESSION['game'])){
-      return end($this->game());
-    } else {
-      return false;
-    } 
   }
   public function in_progress(){
     return isset($_SESSION['game']);
   }
   public function start_game(){
-    if(!$this->in_progress() && $_POST['initials'] != ''){
+    // if(!$this->in_progress() && $_POST['initials'] != ''){
       $_SESSION['game'] = array();
-      $_SESSION['initials'] = strip_tags(strtoupper(substr($_POST['initials'], 0, 3)));
-    }
+      $_SESSION['score'] = 0;
+     // $_SESSION['initials'] = strip_tags(strtoupper(substr($_POST['initials'], 0, 3)));
+    // }
+    $this->set_word();
     header('Location: /');
   }
   public function end_game(){
     session_destroy();
     header('Location: /');
   }
-  public function anagram(){
-    return str_split(strtoupper($this->latest()['anagram'])); 
-  }
-  public function solution(){
-    if($this->latest()){
-      return $this->latest()['wrd']->word;  
-    } else {
-      return false;
-    }
-  }
   public function mark($answer){
-    if($answer == strtoupper($this->solution())){
-      $_SESSION['game'][$this->end()]['correct'] = true;
-      $_SESSION['game'][$this->end()]['end_time'] = time();
+    $last = &$_SESSION['game'][$this->end()];
+    $last['answer'] = $answer;
+    $last['end_time'] = time();
+    if($answer == $last['solution']){ 
+      $last['correct'] = true;
+      $score = 1000 - ($last['end_time'] - $last['start_time']);
+      if($last['hint']){
+        $score *= 0.5;
+      }
+      $last['score'] = $score;
+      $_SESSION['score'] = $_SESSION['score']+$score;
     }
+    $this->set_word();
     header('Location: /');
   }
-  public function score(){
-    $score  = 0;
-    $correct = 0;
-    foreach ($_SESSION['game'] as $anagram) {
-      if(isset($anagram['correct']) && $anagram['correct'] == true) {
-        $correct++;
-        $wordScore = 1000-($anagram['end_time'] - $anagram['start_time']);
-        if($anagram['hint']){
-          $wordScore*=0.5;    
-        }
-        $score += round($wordScore);
-      }
-    }
-    $total = count($_SESSION['game'])-1;
-    return array(
-      "total" => ($total < 0 ? 0 : $total),
-      "correct" => $correct,
-      "score" => $score
-    );
-  }
   public function hint(){
-    $_SESSION['game'][$this->end()]['hint'] = true;
+    $last = &$_SESSION['game'][$this->end()];
+    $last['hint'] = true;
     header('Content-type: application/json');
-    $def = $this->latest()['def'];
+    $def = $last['def'];
     if($def){
-      echo json_encode($this->latest()['def']);  
+      echo json_encode($def);  
     } else {
       echo '[{"text":"Oops, no hint"}]';
     }
     
   }
   public function end(){
-    return count($this->game())-2;
+    return count($_SESSION['game'])-1;
   }
-  public function submit_score(){
-    $fh = fopen("leaderboard.txt", 'a+') or die("can't open file");
-    fwrite($fh, $_SESSION['initials']."----".$this->score()['score']."\n");
-    fclose($fh);
-  }
+  // public function submit_score(){
+  //   $score = $this->score();
+  //   $fh = fopen("leaderboard.txt", 'a+') or die("can't open file");
+  //   fwrite($fh, $_SESSION['initials']."----".$score['score']."\n");
+  //   fclose($fh);
+  // }
+  // public function leaderboard(){
+  //   $scores = array();
+  //   $line = ".......................................................";
+  //   foreach (file('leaderboard.txt') as $row) {
+  //     $data = explode('----', $row);
+  //     $user = $data[0];
+  //     $score = $data[1];
+  //     $space = substr($line, 0, -strlen($user));
+  //     $space = substr($space, 0, -strlen($score));
+  //     $scores[] = $user . ' ' . $space . ' ' . $score;
+  //   }
+  //   return $scores;
+  // }
 }
 
 $g = new game();
 
-switch(explode('/',ltrim(rtrim($_SERVER["REQUEST_URI"], '/'), '/'))[0]){
+$params = explode('/',ltrim(rtrim($_SERVER["REQUEST_URI"], '/'), '/'));
+
+switch($params[0]){
   case "":
   case "hard":
   case "medium":
   case "easy":
-    $g->set_word();
     include "views/index.tmp.php";
   break;
   case "solution":
@@ -135,13 +126,13 @@ switch(explode('/',ltrim(rtrim($_SERVER["REQUEST_URI"], '/'), '/'))[0]){
     $g->hint();
   break;
   case "submit-score":
-    $g->submit_score();
+    // $g->submit_score();
   break;
   default:
     echo "404";
   break;
 }
 
-
-
 ?>
+
+   
